@@ -14,3 +14,7 @@ people = [Person("A", 20), Person("C", 40), Person("B", 15), Person("E", 19)]
 
 for p in sorted(people):
     print(p)
+
+# Sort by name
+for p in sorted(people, key=lambda p: p.name):
+    print(p)
