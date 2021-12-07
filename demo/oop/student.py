@@ -1,18 +1,34 @@
 class Student:
+    courses = {'java': 10000, 'python': 8000, '.net': 12000}
+
     # Constructor
     def __init__(self, name, course):
+        if course not in Student.courses:
+            raise ValueError("Invalid course!")
+
         # object attributes
         self.name = name
         self.course = course
         self.feepaid = 0
 
     # Methods
+    @property
+    def totalfee(self):
+        return Student.courses[self.course]
+
+    @property
+    def dueamount(self):
+        return  self.totalfee - self.feepaid
+
     def show(self):
         print(f"Name     : {self.name}")
         print(f"Course   : {self.course}")
         print(f"Fee paid : {self.feepaid}")
 
     def payment(self, amount):
+        if amount > self.dueamount:
+            raise ValueError(f"Excess fee being paid! Due amount is {self.dueamount}, but {amount} is being paid")
+
         self.feepaid += amount
 
     def __str__(self):
@@ -30,12 +46,16 @@ class Student:
         obj.feepaid = self.feepaid + amount
         return obj
 
+
 # Create object of Student class
 
 
-s1 = Student("Stephen", "Java")
-s2 = Student("Stephen", "Java")
+s1 = Student("Stephen", "java")
+s2 = Student("Stephen", "java")
 s1.payment(5000)
+s1.payment(10000)
+print(s1.dueamount)
+
 print(s1 == s2)  # s1.__eq__(s2)
 print(s1 != s2)
 print(s1 > s2)  # s1.__gt__(s2)
