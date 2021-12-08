@@ -8,7 +8,7 @@ class B:
         print("Process in B")
 
 
-class C(A, B):
+class C(B, A):
     pass
 
 
