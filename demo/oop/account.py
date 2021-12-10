@@ -1,3 +1,11 @@
+class BalanceError(Exception):
+    def __init__(self, balance, amount):
+        self.balance = balance
+        self.amount = amount
+
+    def __str__(self):
+        return f"Trying to withdraw {self.amount}, but available balance is {self.balance}"
+
 class SavingsAccount:
     # Constructor
     def __init__(self, acc_number, acc_holder_name, balance=0):
@@ -13,9 +21,17 @@ class SavingsAccount:
         print(f"Balance           : {self.__balance}")
 
     def deposit(self, amount):
+        if amount <= 0:
+            raise ValueError(f"Invalid amount {amount}. Valid amount should be > 0")
         self.__balance += amount
 
     def withdraw(self, amount):
+        if amount <= 0:
+            raise ValueError(f"Invalid amount {amount}. Valid amount should be > 0")
+
+        if amount > self.__balance:
+            raise BalanceError(self.__balance, amount)
+
         self.__balance -= amount
 
     def getbalance(self):
@@ -24,6 +40,8 @@ class SavingsAccount:
 
 # Create object
 ac1 = SavingsAccount("101", "Steve")
+ac1.deposit(10000)
+ac1.withdraw(20000)
 ac2 = SavingsAccount("102", "Scott", 10000)
 print(ac2.__dict__)
 print(ac2._SavingsAccount__balance)
