@@ -1,0 +1,6 @@
+10-10-2021,15-10-2021,Take backup of Laptop
+23-11-2021,24-11-2021,Read Klara and the Sun book
+11-24-2021,26-11-2021,Build Lambda in AWS for API
+02-12-2021,10-12-2021,Build app using React
+
+02-12-2021,15-12-2021,Read a book on AWS
